@@ -53,13 +53,14 @@ function tick() {
 		playerX += 5;
 	}
 
+	var box;
 	for (var i = 0; i < boxes.length; i++) {
-		var box = boxes[i];
+		box = boxes[i];
 
 		box.y -= gravity;
 
 		if (Math.abs(box.y - stackHeight) < 5) {
-			if ((stacked.length > 0 && Math.abs(box.x - stacked[stacked.length - 1].x) < box.width) || (stacked.length == 0 && Math.abs(box.x - playerX) < box.width)) {
+			if ((stacked.length > 0 && Math.abs(box.x - stacked[stacked.length - 1].x) < box.width) || (stacked.length === 0 && Math.abs(box.x - playerX) < box.width)) {
 				if (stacked.length > 0)
 					box.y = stacked[stacked.length - 1].y + box.height;
 
@@ -76,9 +77,9 @@ function tick() {
 		}
 	}
 
-	for (var i = 0; i < stacked.length; i++) {
-		var box = stacked[i];
-		var base = i === 0 ? playerX : stacked[i - 1].x;
+	for (var j = 0; j < stacked.length; j++) {
+		box = stacked[j];
+		var base = j === 0 ? playerX : stacked[j - 1].x;
 		box.x += (base - box.x) * slide;
 		grounded = true;
 	}
@@ -97,20 +98,20 @@ setInterval(function () {
 	ctx.fillRect(w/2 + playerX - 25, h - 120, 50, 100);
 
 	// draw boxes
+	var box;
 	for (var i = 0; i < boxes.length; i++) {
-		var box = boxes[i];
+		box = boxes[i];
 		ctx.fillStyle = box.color;
 
 		ctx.fillRect(w/2 + box.x - box.width/2, h - box.y - box.height - 120, box.width, box.height - 1);
 	}
 
 	// draw stacked
-	for (var i = 0; i < stacked.length; i++) {
-		var box = stacked[i];
+	for (i = 0; i < stacked.length; i++) {
+		box = stacked[i];
 		ctx.fillStyle = box.color;
 		ctx.lineWidth = 1;
 		ctx.strokeStyle = 'red';
-		ctx.bor
 		ctx.fillRect(w/2 + box.x - box.width/2, h - box.y - box.height - 120, box.width, box.height - 1);
 	}
 }, 20);

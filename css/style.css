@@ -4,3 +4,12 @@ html, body {
 	height: 100%;
 	overflow: hidden;
 }
+
+#instructions {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	font-family: sans-serif;
+	font-size: 10px;
+	pointer-events: none;
+}
